@@ -13,19 +13,19 @@ const ItemForm = () => {
 
      <Box sx={{display : 'flex' , flexDirection : 'column', justifyContent : 'center' , alignItems : 'center', mt : '100px' }}>
      
-     <Box sx={{width : '50%', mb : '30px'}}>
+     <Box sx={{width : {lg :'50%' , sm : '70%' , xs : '80%'}, mb : '30px'}}>
      <TextField  fullWidth id="outlined-basic" label="Name" variant="outlined" />
      </Box>
 
-     <Box sx={{width : '50%',mb : '30px'}}>
+     <Box sx={{width : {lg :'50%' , sm : '70%' , xs : '80%'},mb : '30px'}}>
      <TextField  fullWidth id="outlined-basic" label="Description" variant="outlined" />
      </Box>
 
-     <Box sx={{width : '50%',mb : '30px'}}>
+     <Box sx={{width : {lg :'50%' , sm : '70%' , xs : '80%'},mb : '30px'}}>
      <TextField  fullWidth id="outlined-basic" label="Price" variant="outlined" />
      </Box>
 
-     <Box sx={{width : '50%'}}>
+     <Box sx={{width : {lg :'50%' , sm : '70%' , xs : '80%'}}}>
      <TextField  fullWidth id="outlined-basic" label="Category" variant="outlined" />
      </Box>
      

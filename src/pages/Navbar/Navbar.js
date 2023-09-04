@@ -7,8 +7,17 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Container } from '@mui/material';
+import { useHistory } from "react-router-dom";
 
 const Navbar = () => {
+    const history = useHistory();
+
+    const categoryHandler = () => {
+        history.replace('/');
+    }
+    const itemHandler = () => {
+        history.replace('/item');
+    }
   return (
     <Fragment>
     <Container maxWidth='xl'>
@@ -27,8 +36,8 @@ const Navbar = () => {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 , display : {xs : 'none' , sm : 'flex'} }}>
             Crud Application
           </Typography>
-          <Button color="inherit">Category</Button>
-          <Button color="inherit">Item</Button>
+          <Button color="inherit" onClick={categoryHandler}>Category</Button>
+          <Button color="inherit" onClick={itemHandler}>Item</Button>
         </Toolbar>
       </AppBar>
     </Box>
