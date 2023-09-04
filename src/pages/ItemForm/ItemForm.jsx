@@ -9,15 +9,24 @@ const ItemForm = () => {
   return (
     <Fragment>
      <Container maxWidth='xl'>
+     
 
-     <Box sx={{display : 'flex' , flexDirection : 'column', justifyContent : 'center' , alignItems : 'center', mt : '200px' }}>
+     <Box sx={{display : 'flex' , flexDirection : 'column', justifyContent : 'center' , alignItems : 'center', mt : '100px' }}>
      
      <Box sx={{width : '50%', mb : '30px'}}>
      <TextField  fullWidth id="outlined-basic" label="Name" variant="outlined" />
      </Box>
 
-     <Box sx={{width : '50%'}}>
+     <Box sx={{width : '50%',mb : '30px'}}>
      <TextField  fullWidth id="outlined-basic" label="Description" variant="outlined" />
+     </Box>
+
+     <Box sx={{width : '50%',mb : '30px'}}>
+     <TextField  fullWidth id="outlined-basic" label="Price" variant="outlined" />
+     </Box>
+
+     <Box sx={{width : '50%'}}>
+     <TextField  fullWidth id="outlined-basic" label="Category" variant="outlined" />
      </Box>
      
      <Button size='large' variant="outlined" color="primary" sx={{mt : '30px'}}>
