@@ -12,6 +12,8 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { useDispatch, useSelector } from "react-redux";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const categoryObj = [
     {
@@ -29,7 +31,7 @@ const categoryObj = [
 
 ]
 
-
+const notify = (error) => toast(error);
 
 
 const initialValues = {
@@ -65,6 +67,7 @@ const ItemForm = () => {
                 console.log(values);
                 console.log(selectCategory,'commmmmmmmm');
                 console.log(category, 'Redux category')
+                notify('Items added to the Cart')
             },
         });
 
@@ -145,7 +148,7 @@ const ItemForm = () => {
                     </Box>
                 </form>
             </Container>
-
+            <ToastContainer />
         </Fragment>
     )
 }

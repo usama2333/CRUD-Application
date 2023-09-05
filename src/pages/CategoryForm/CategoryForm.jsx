@@ -7,10 +7,14 @@ import { useFormik } from "formik";
 import { categorySchema } from "../../schema/category";
 import { useDispatch, useSelector } from "react-redux";
 import { tableActions } from '../../store/table';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const initialValues = {
   name: "",
 };
+
+const notify = (error) => toast(error);
 
 const CategoryForm = () => {
 
@@ -25,6 +29,7 @@ const CategoryForm = () => {
         console.log('data..............');
         console.log(values,'category form .................');
         dispatch(tableActions.setCategory(values));
+        notify('Category added successfully')
       },
     });
   return (
@@ -81,6 +86,7 @@ const CategoryForm = () => {
         </Box>
         </form>
       </Container>
+      <ToastContainer />
     </Fragment>
   );
 };
