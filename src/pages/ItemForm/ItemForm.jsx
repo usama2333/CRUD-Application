@@ -5,6 +5,7 @@ import { Container, Typography } from '@mui/material';
 import Button from '@mui/material/Button';
 import { useFormik } from "formik";
 import { itemSchema } from '../../schema/item';
+import itemData from '../../services/item';
 
 
 const initialValues = {
@@ -14,27 +15,24 @@ const initialValues = {
     category: ""
 };
 
+const ItemForm = () => {
 
-   
-
-    const ItemForm = () => {
-
-        const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
+    const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
         useFormik({
             initialValues: initialValues,
             validationSchema: itemSchema,
             onSubmit: (values, action) => {
                 // AddLoginData(values, history, authCtx, notify , login , setLogin );
+                itemData(values);
                 console.log('data..............');
-                console.log(values.name);
+                console.log(values);
             },
         });
 
-        return (
-            <Fragment>
-                <Container maxWidth='xl'>
-
-                <form onSubmit={handleSubmit}>
+    return (
+    <Fragment>
+    <Container maxWidth='xl'>
+     <form onSubmit={handleSubmit}>
                     <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', mt: '100px' }}>
 
                         <Box sx={{ width: { lg: '50%', sm: '70%', xs: '80%' }, mb: '30px' }}>
@@ -73,21 +71,27 @@ const initialValues = {
                                 </Typography>
                             ) : null}
                         </Box>
-                        
 
-                        
 
-                        <Button type='submit' size='large' variant="outlined" color="primary" sx={{ mt: '0px' }}>
+
+
+                        <Button
+                            type="submit"
+                            size="large"
+                            variant="outlined"
+                            color="primary"
+                            sx={{ mt: "30px" }}
+                        >
                             Submit
                         </Button>
 
                     </Box>
-</form>
-                </Container>
+                </form>
+            </Container>
 
-            </Fragment>
-        )
-    }
+        </Fragment>
+    )
+}
 
-    export default ItemForm;
+export default ItemForm;
 
