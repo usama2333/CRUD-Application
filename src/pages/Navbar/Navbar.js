@@ -8,6 +8,7 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Container } from '@mui/material';
 import { useHistory } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
     const history = useHistory();
@@ -42,6 +43,7 @@ const Navbar = () => {
           </Button>
           <Button color="inherit" onClick={categoryHandler}>Category</Button>
           <Button color="inherit" onClick={itemHandler}>Item</Button>
+          
         </Toolbar>
       </AppBar>
     </Box>

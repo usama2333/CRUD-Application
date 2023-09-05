@@ -4,7 +4,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     data : [],
     category : {},
-    test : false,
+    add : true,
+    delete :false,
     log : false,
 }
 
@@ -18,9 +19,13 @@ const tableSlice = createSlice ({
         setCategory(state , action) {
           state.category = action.payload;
         },
-        setTest(state , action) {
-          state.test = true;
+        
+        setAdd(state , action) {
+          state.add = action.payload;
         },
+        setDel(state , action) {
+            state.del = action.payload;
+          },
         setLog(state)  {
             state.log = !state.log;
         }

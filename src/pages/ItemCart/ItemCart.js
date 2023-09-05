@@ -4,19 +4,22 @@ import Cart from './Cart';
 import fetchItem from '../../services/getItem';
 import { useDispatch, useSelector } from "react-redux";
 import { tableActions } from '../../store/table';
+import putData from '../../services/putItem';
+import apiCall from '../../services/apiCall';
+import store from '../../store';
 
 const ItemCart = () => {
     
 
     const data = useSelector((state) => state.table.data);
-
-    const dispatch = useDispatch();
-
    
-    useEffect(() => {
-        fetchItem( dispatch, tableActions);
+const onResponse = (data)=>{
+    store.dispatch(tableActions.setData(data))
+}
 
-       console.log(data,'this is cart data')
+    useEffect(() => {
+        apiCall('get',null,null,onResponse);
+
       }, []);
 
   return (
@@ -26,7 +29,7 @@ const ItemCart = () => {
     <Box sx={{display : 'flex' , justifyContent : 'center' ,justifyContent : 'space-evenly', flexWrap : 'wrap'}}>
    
    {data.map((data) => (
-    <Cart name={data.name} id={data.id} price={data.price} description={data.discription} category={data.category} />
+    <Cart key={data.id} id={data.id} name={data.name} price={data.price} description={data.discription} category={data.category} />
    ))}
     
          

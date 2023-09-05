@@ -14,11 +14,25 @@ const initialValues = {
   name: "",
 };
 
+
+
 const notify = (error) => toast(error);
 
 const CategoryForm = () => {
 
   const dispatch = useDispatch();
+
+  const handleAdd = () => {
+    dispatch(tableActions.setAdd(true));
+    dispatch(tableActions.setDel(false));
+    console.log('add')
+  }
+  
+  const handleDelete = () => {
+    dispatch(tableActions.setDel(true));
+    dispatch(tableActions.setAdd(false));
+    console.log('delete')
+  }
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
@@ -29,7 +43,7 @@ const CategoryForm = () => {
         console.log('data..............');
         console.log(values,'category form .................');
         dispatch(tableActions.setCategory(values));
-        notify('Category added successfully')
+        notify('Done successfully')
       },
     });
   return (
@@ -73,16 +87,29 @@ const CategoryForm = () => {
               variant="outlined"
             />
           </Box>
-
-          <Button
+        <Box>
+        <Button
             type="submit"
             size="large"
             variant="outlined"
             color="primary"
-            sx={{ mt: "30px" }}
+            sx={{ mt: "30px" , mr : '20px'}}
+            onClick={handleAdd}
           >
             Submit
           </Button>
+          <Button
+            type="submit"
+            size="large"
+            variant="outlined"
+            color="error"
+            onClick={handleDelete}
+            sx={{ mt: "30px" }}
+          >
+            Delete
+          </Button>
+        </Box>
+         
         </Box>
         </form>
       </Container>

@@ -14,6 +14,7 @@ import Select from '@mui/material/Select';
 import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import apiCall from '../../services/apiCall';
 
 const categoryObj = [
     {
@@ -31,6 +32,8 @@ const categoryObj = [
 
 ]
 
+
+
 const notify = (error) => toast(error);
 
 
@@ -44,25 +47,46 @@ const initialValues = {
 const ItemForm = () => {
     const [selectCategory, setSelectCategory] = useState('');
     const category = useSelector((state) => state.table.category);
-    console.log(category, 'rdeux category')
+    // const add = useSelector((state) => state.table.add);
+    // const del = useSelector((state) => state.table.del);
+    // console.log(category, 'rdeux category')
+    // console.log(add, 'addddddddddd');
+    // console.log(del,'dellllllllllll')
     
 
     useEffect(() => {
-        categoryObj.push(category);
+        // if(add === true && category) {
+            if(category === null) {
+                return
+            }
+            else {
+                categoryObj.push(category);
+            }
+          
+        
+        // if(del === true  && category) {
+        //     categoryObj.pop();
+          
+            //  updatedItems = categoryObj.filter((item) => item.name !== category);
+            //  console.log(updatedItems,'updated.....................................')
+        // }
+       
       }, [category]);
 
     const handleSelect = (event) => {
         setSelectCategory(event.target.value);
     };
-
+const onResponse = ()=>{
+    
+}
     const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
         useFormik({
             initialValues: initialValues,
             validationSchema: itemSchema,
             onSubmit: (values, action) => {
                 // AddLoginData(values, history, authCtx, notify , login , setLogin );
-                itemData(values,selectCategory);
-                fetchItem();
+                apiCall('post',{...values, 'category' : selectCategory}, null, onResponse);
+                // fetchItem();
                 console.log('data..............');
                 console.log(values);
                 console.log(selectCategory,'commmmmmmmm');
@@ -121,12 +145,10 @@ const ItemForm = () => {
                                     onChange={handleSelect}
                                     onBlur={handleBlur} id="category" name='category'
                                 >
-
-                                {categoryObj.map((categoryData) => (
+                                { categoryObj.map((categoryData) => (
                                     <MenuItem value={categoryData.name}>{categoryData.name}</MenuItem>
     
-                                ))}
-                                    
+                                ))}     
 
                                 </Select>
                             </FormControl>
