@@ -18,7 +18,7 @@ const CategoryForm = () => {
       onSubmit: (values, action) => {
         // AddLoginData(values, history, authCtx, notify , login , setLogin );
         console.log('data..............');
-        console.log(values.name);
+        console.log(values.name,'category form .................');
       },
     });
   return (

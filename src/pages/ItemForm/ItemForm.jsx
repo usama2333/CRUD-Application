@@ -1,11 +1,32 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { Container, Typography } from '@mui/material';
 import Button from '@mui/material/Button';
 import { useFormik } from "formik";
 import { itemSchema } from '../../schema/item';
-import itemData from '../../services/item';
+import itemData from '../../services/postItem';
+import fetchItem from '../../services/getItem';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+
+const categoryObj = [
+    {
+        name : 'Dress',
+    },
+    {
+        name : 'Shoes',
+    },
+    {
+        name : 'Car',
+    },
+    {
+        name : 'Phone',
+    },
+
+]
 
 
 const initialValues = {
@@ -16,6 +37,11 @@ const initialValues = {
 };
 
 const ItemForm = () => {
+    const [selectCategory, setSelectCategory] = useState('');
+
+    const handleSelect = (event) => {
+        setSelectCategory(event.target.value);
+    };
 
     const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
         useFormik({
@@ -23,16 +49,18 @@ const ItemForm = () => {
             validationSchema: itemSchema,
             onSubmit: (values, action) => {
                 // AddLoginData(values, history, authCtx, notify , login , setLogin );
-                itemData(values);
+                itemData(values,selectCategory);
+                fetchItem();
                 console.log('data..............');
                 console.log(values);
+                console.log(selectCategory,'commmmmmmmm')
             },
         });
 
     return (
-    <Fragment>
-    <Container maxWidth='xl'>
-     <form onSubmit={handleSubmit}>
+        <Fragment>
+            <Container maxWidth='xl'>
+                <form onSubmit={handleSubmit}>
                     <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', mt: '100px' }}>
 
                         <Box sx={{ width: { lg: '50%', sm: '70%', xs: '80%' }, mb: '30px' }}>
@@ -64,12 +92,30 @@ const ItemForm = () => {
                         </Box>
 
                         <Box sx={{ width: { lg: '50%', sm: '70%', xs: '80%' }, mb: '30px' }}>
-                            <TextField fullWidth onChange={handleChange} onBlur={handleBlur} value={values.category} id="category" name='category' label="Category" variant="outlined" />
+                            {/* <TextField fullWidth onChange={handleChange} onBlur={handleBlur} value={values.category} id="category" name='category' label="Category" variant="outlined" />
                             {errors.category && touched.category ? (
                                 <Typography variant="p" color="red" sx={{ fontSize: '14px' }}>
                                     {errors.category}
                                 </Typography>
-                            ) : null}
+                            ) : null} */}
+                            <FormControl fullWidth>
+                                <InputLabel id="demo-simple-select-label">Category</InputLabel>
+                                <Select
+
+                                    value={selectCategory}
+                                    label="Category"
+                                    onChange={handleSelect}
+                                    onBlur={handleBlur} id="category" name='category'
+                                >
+
+                                {categoryObj.map((categoryData) => (
+                                    <MenuItem value={categoryData.name}>{categoryData.name}</MenuItem>
+    
+                                ))}
+                                    
+
+                                </Select>
+                            </FormControl>
                         </Box>
 
 

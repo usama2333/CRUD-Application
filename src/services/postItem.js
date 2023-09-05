@@ -1,8 +1,8 @@
 import axios from "axios";
 
-export default async function itemData( data, history, authCtx, notify, login, setLogin ) {
+export default async function itemData( data,selectCategory, history, authCtx, notify, login, setLogin ) {
   const apiUrl = 'https://64f6b5689d77540849527cd5.mockapi.io/api/item/';
-  
+  console.log(selectCategory,'category.............')
   try {
     const response = await axios({
       method: "post",
@@ -12,7 +12,7 @@ export default async function itemData( data, history, authCtx, notify, login, s
         name: data.name,
         discription: data.discription,
         price : data.price,
-        category : data.category,
+        category : selectCategory,
       },
     });
 

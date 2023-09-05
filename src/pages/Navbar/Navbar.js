@@ -15,6 +15,10 @@ const Navbar = () => {
     const categoryHandler = () => {
         history.replace('/');
     }
+
+    const cartHandler = () => {
+      history.replace('/cart');
+  }
     const itemHandler = () => {
         history.replace('/item');
     }
@@ -33,9 +37,9 @@ const Navbar = () => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 , display : {xs : 'none' , sm : 'flex'} }}>
-            Crud Application
-          </Typography>
+          <Button onClick={cartHandler} variant="h6" component="div" sx={{ flexGrow: 1 , display : {xs : 'none' , sm : 'flex'} }}>
+            Item Card
+          </Button>
           <Button color="inherit" onClick={categoryHandler}>Category</Button>
           <Button color="inherit" onClick={itemHandler}>Item</Button>
         </Toolbar>
