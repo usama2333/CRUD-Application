@@ -85,7 +85,7 @@ let data = {
         </Typography>
 
       </Stack>
-      <Stack direction='row' justifyContent={'space-between'}>
+      {/* <Stack direction='row' justifyContent={'space-between'}>
       <Typography gutterBottom variant="h6" component="div">
           id
         </Typography>
@@ -93,7 +93,7 @@ let data = {
           {id}
         </Typography>
 
-      </Stack>
+      </Stack> */}
       </CardContent>
       <CardActions>
 

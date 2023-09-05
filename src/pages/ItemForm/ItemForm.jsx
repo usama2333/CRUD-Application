@@ -5,8 +5,6 @@ import { Container, Typography } from '@mui/material';
 import Button from '@mui/material/Button';
 import { useFormik } from "formik";
 import { itemSchema } from '../../schema/item';
-import itemData from '../../services/postItem';
-import fetchItem from '../../services/getItem';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -18,21 +16,18 @@ import apiCall from '../../services/apiCall';
 
 const categoryObj = [
     {
-        name : 'Dress',
+        name : 'men',
     },
     {
-        name : 'Shoes',
+        name : 'women',
     },
     {
-        name : 'Car',
+        name : 'dress',
     },
     {
-        name : 'Phone',
+        name : 'shoes',
     },
-
 ]
-
-
 
 const notify = (error) => toast(error);
 
@@ -63,7 +58,6 @@ const ItemForm = () => {
                 categoryObj.push(category);
             }
           
-        
         // if(del === true  && category) {
         //     categoryObj.pop();
           
@@ -110,7 +104,6 @@ const onResponse = ()=>{
                             ) : null}
                         </Box>
 
-
                         <Box sx={{ width: { lg: '50%', sm: '70%', xs: '80%' }, mb: '30px' }}>
                             <TextField fullWidth onChange={handleChange} onBlur={handleBlur} value={values.discription} name='discription' id="discription" label="Description" variant="outlined" />
                             {errors.discription && touched.discription ? (
@@ -154,15 +147,12 @@ const onResponse = ()=>{
                             </FormControl>
                         </Box>
 
-
-
-
                         <Button
                             type="submit"
                             size="large"
                             variant="outlined"
                             color="primary"
-                            sx={{ mt: "30px" }}
+                            sx={{ mt: "10px" }}
                         >
                             Submit
                         </Button>

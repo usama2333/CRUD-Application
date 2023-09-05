@@ -14,8 +14,6 @@ const initialValues = {
   name: "",
 };
 
-
-
 const notify = (error) => toast(error);
 
 const CategoryForm = () => {
@@ -77,7 +75,6 @@ const CategoryForm = () => {
                   ) : null}
            
           </Box>
-         
 
           <Box sx={{ width: { lg: "50%", sm: "70%", xs: "80%" } }}>
             <TextField
