@@ -5,12 +5,17 @@ import { Container, Typography } from "@mui/material";
 import Button from "@mui/material/Button";
 import { useFormik } from "formik";
 import { categorySchema } from "../../schema/category";
+import { useDispatch, useSelector } from "react-redux";
+import { tableActions } from '../../store/table';
 
 const initialValues = {
   name: "",
 };
 
 const CategoryForm = () => {
+
+  const dispatch = useDispatch();
+
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
       initialValues: initialValues,
@@ -18,7 +23,8 @@ const CategoryForm = () => {
       onSubmit: (values, action) => {
         // AddLoginData(values, history, authCtx, notify , login , setLogin );
         console.log('data..............');
-        console.log(values.name,'category form .................');
+        console.log(values,'category form .................');
+        dispatch(tableActions.setCategory(values));
       },
     });
   return (

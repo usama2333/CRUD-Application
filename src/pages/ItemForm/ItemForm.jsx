@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { Container, Typography } from '@mui/material';
@@ -11,6 +11,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import { useDispatch, useSelector } from "react-redux";
 
 const categoryObj = [
     {
@@ -29,6 +30,8 @@ const categoryObj = [
 ]
 
 
+
+
 const initialValues = {
     name: "",
     discription: "",
@@ -38,6 +41,13 @@ const initialValues = {
 
 const ItemForm = () => {
     const [selectCategory, setSelectCategory] = useState('');
+    const category = useSelector((state) => state.table.category);
+    console.log(category, 'rdeux category')
+    
+
+    useEffect(() => {
+        categoryObj.push(category);
+      }, [category]);
 
     const handleSelect = (event) => {
         setSelectCategory(event.target.value);
@@ -53,7 +63,8 @@ const ItemForm = () => {
                 fetchItem();
                 console.log('data..............');
                 console.log(values);
-                console.log(selectCategory,'commmmmmmmm')
+                console.log(selectCategory,'commmmmmmmm');
+                console.log(category, 'Redux category')
             },
         });
 

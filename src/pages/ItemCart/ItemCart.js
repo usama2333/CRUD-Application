@@ -2,17 +2,22 @@ import React, { Fragment , useState, useEffect} from 'react';
 import { Box, Container, Stack } from '@mui/material';
 import Cart from './Cart';
 import fetchItem from '../../services/getItem';
+import { useDispatch, useSelector } from "react-redux";
+import { tableActions } from '../../store/table';
 
 const ItemCart = () => {
-    const [data , setData] = useState([]);
-    const [test , setTest] = useState(false);
+    
+
+    const data = useSelector((state) => state.table.data);
+
+    const dispatch = useDispatch();
 
    
     useEffect(() => {
-        fetchItem(setData, setTest);
+        fetchItem( dispatch, tableActions);
 
        console.log(data,'this is cart data')
-      }, [test]);
+      }, []);
 
   return (
     <Fragment>
