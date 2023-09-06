@@ -42,13 +42,16 @@ const initialValues = {
 const ItemForm = () => {
   const [selectCategory, setSelectCategory] = useState("");
   const category = useSelector((state) => state.table.category);
+  const [test ,setTest] = useState(null);
   const id = useSelector((state) => state.table.id);
   const update = useSelector((state) => state.table.update);
   const dispatch = useDispatch();
   const add = useSelector((state) => state.table.add);
   const del = useSelector((state) => state.table.del);
+ 
 
   useEffect(() => {
+    setTest(category);
     if (category === null) {
       return;
     }
@@ -65,11 +68,15 @@ const ItemForm = () => {
     //  updatedItems = categoryObj.filter((item) => item.name !== category);
     //  console.log(updatedItems,'updated.....................................')
     // }
+    
   }, [category]);
 
   const handleSelect = (event) => {
     setSelectCategory(event.target.value);
   };
+  const handleClick =() => {
+    console.log('click..............')
+  }
   const onResponse = () => {};
   const onResponsee = (id) => {};
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
@@ -186,6 +193,7 @@ const ItemForm = () => {
                   onBlur={handleBlur}
                   id="category"
                   name="category"
+                  onClick={handleClick}
                 >
                   {categoryObj.map((categoryData) => (
                     <MenuItem value={categoryData.name}>

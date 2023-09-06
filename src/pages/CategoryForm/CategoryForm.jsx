@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { tableActions } from "../../store/table";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useHistory } from "react-router-dom";
 
 const initialValues = {
   name: "",
@@ -18,6 +19,7 @@ const notify = (error) => toast(error);
 
 const CategoryForm = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const handleAdd = () => {
     dispatch(tableActions.setAdd(true));
@@ -28,6 +30,9 @@ const CategoryForm = () => {
   const handleDelete = () => {
     dispatch(tableActions.setDel(true));
     dispatch(tableActions.setAdd(false));
+    const timeoutId = setTimeout(() => {
+      dispatch(tableActions.setDel(true));
+    }, 3000);
     console.log("delete");
   };
 
@@ -40,6 +45,7 @@ const CategoryForm = () => {
         console.log(values, "category form .................");
         dispatch(tableActions.setCategory(values));
         notify("Done successfully");
+        history.replace('/item');
       },
     });
   return (
