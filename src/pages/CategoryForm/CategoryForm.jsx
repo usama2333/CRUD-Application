@@ -31,8 +31,8 @@ const CategoryForm = () => {
     dispatch(tableActions.setDel(true));
     dispatch(tableActions.setAdd(false));
     const timeoutId = setTimeout(() => {
-      dispatch(tableActions.setDel(true));
-    }, 3000);
+      dispatch(tableActions.setDel(false));
+    }, 2000);
     console.log("delete");
   };
 

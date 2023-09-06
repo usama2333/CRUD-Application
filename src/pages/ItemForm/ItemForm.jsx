@@ -15,7 +15,7 @@ import "react-toastify/dist/ReactToastify.css";
 import apiCall from "../../services/apiCall";
 import { tableActions } from "../../store/table";
 
-const categoryObj = [
+var categoryObj = [
   {
     name: "men",
   },
@@ -48,7 +48,8 @@ const ItemForm = () => {
   const dispatch = useDispatch();
   const add = useSelector((state) => state.table.add);
   const del = useSelector((state) => state.table.del);
- 
+
+  console.log(category,'.cat.....................................')
 
   useEffect(() => {
     setTest(category);
@@ -56,18 +57,24 @@ const ItemForm = () => {
       return;
     }
     if (add == true) {
-      categoryObj.push(category);
+     
+      const foundItems = categoryObj.filter(item => item.name === category.name);
+    
+        if(foundItems.length > 0) {
+
+            return;
+        }
+        else {     
+          categoryObj.push(category);
+        }       
+      
     }
     if (del == true) {
-      categoryObj.pop();
+    
+    const delArray = categoryObj.filter (item => item.name !== category.name);
+    categoryObj= delArray;
+    console.log(delArray,'del array')
     }
-
-    // if(del === true  && category) {
-    //     categoryObj.pop();
-
-    //  updatedItems = categoryObj.filter((item) => item.name !== category);
-    //  console.log(updatedItems,'updated.....................................')
-    // }
     
   }, [category]);
 
@@ -84,7 +91,7 @@ const ItemForm = () => {
       initialValues: initialValues,
       validationSchema: itemSchema,
       onSubmit: (values, action) => {
-        // AddLoginData(values, history, authCtx, notify , login , setLogin );
+        
         if (update === true) {
           console.log(id, "api id is .............");
           apiCall("put", values, id, onResponsee);
@@ -99,11 +106,6 @@ const ItemForm = () => {
           );
         }
 
-        // fetchItem();
-        console.log("data..............");
-        console.log(values);
-        console.log(selectCategory, "commmmmmmmm");
-        console.log(category, "Redux category");
         notify("Items added to the Cart");
       },
     });
@@ -195,11 +197,13 @@ const ItemForm = () => {
                   name="category"
                   onClick={handleClick}
                 >
+               
                   {categoryObj.map((categoryData) => (
                     <MenuItem value={categoryData.name}>
                       {categoryData.name}
                     </MenuItem>
                   ))}
+
                 </Select>
               </FormControl>
             </Box>
