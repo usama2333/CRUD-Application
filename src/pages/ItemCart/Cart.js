@@ -2,19 +2,19 @@ import React, { Fragment } from 'react';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Box, Container, Stack } from '@mui/material';
-import putData from '../../services/putItem';
 import apiCall from '../../services/apiCall';
 import store from '../../store';
 import { tableActions } from '../../store/table';
 import { useSelector,useDispatch, } from 'react-redux';
 import { useHistory } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
-
+const notify = (error) => toast(error);
 const Cart = ({key ,id,name,price,description,category}) => {
     const history = useHistory();
     const dispatch = useDispatch();
@@ -23,23 +23,17 @@ const Cart = ({key ,id,name,price,description,category}) => {
     const onResponse = (id)=>{
 
     }
-let data = {
-    "description": "description 1",
-    "name": "Muhammad Usama Ahmed",
-    "price": "56",
-    "category": "test",
-    "id": "1",
-    "discription": "test"
-}
+
     const onPress = (type) => {
     if(type == 'delete'){
         apiCall('delete',null,id, ()=>{
             const newData=   reduxData.filter((item)=> item.id !== id)
             store.dispatch(tableActions.setData(newData))
+            notify('Item Deleted Successfully')
         })
     }
     else {
-        // apiCall('put',data,id, onResponse)
+       
         history.replace('/item');
         dispatch(tableActions.setId(id));
         dispatch(tableActions.setUpdate(true));
@@ -108,7 +102,7 @@ let data = {
         <Button onClick={()=> onPress('delete')} variant="outlined" color="error"  size="small">Delete</Button>
       </CardActions>
     </Card>
-      
+    <ToastContainer />
     </Fragment>
   )
 }
