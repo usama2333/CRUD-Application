@@ -10,11 +10,14 @@ import putData from '../../services/putItem';
 import apiCall from '../../services/apiCall';
 import store from '../../store';
 import { tableActions } from '../../store/table';
-import { useSelector } from 'react-redux';
+import { useSelector,useDispatch, } from 'react-redux';
+import { useHistory } from "react-router-dom";
 
 
 
 const Cart = ({key ,id,name,price,description,category}) => {
+    const history = useHistory();
+    const dispatch = useDispatch();
     const reduxData = useSelector((state) => state.table.data);
 
     const onResponse = (id)=>{
@@ -36,7 +39,11 @@ let data = {
         })
     }
     else {
-        apiCall('put',data,id, onResponse)
+        // apiCall('put',data,id, onResponse)
+        history.replace('/item');
+        dispatch(tableActions.setId(id));
+        dispatch(tableActions.setUpdate(true));
+        
     }
      }
    
@@ -85,7 +92,7 @@ let data = {
         </Typography>
 
       </Stack>
-      {/* <Stack direction='row' justifyContent={'space-between'}>
+      <Stack direction='row' justifyContent={'space-between'}>
       <Typography gutterBottom variant="h6" component="div">
           id
         </Typography>
@@ -93,7 +100,7 @@ let data = {
           {id}
         </Typography>
 
-      </Stack> */}
+      </Stack>
       </CardContent>
       <CardActions>
 

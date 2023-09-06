@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import apiCall from '../../services/apiCall';
+import { tableActions } from '../../store/table';
 
 const categoryObj = [
     {
@@ -40,8 +41,12 @@ const initialValues = {
 };
 
 const ItemForm = () => {
+
     const [selectCategory, setSelectCategory] = useState('');
     const category = useSelector((state) => state.table.category);
+    const id = useSelector((state) => state.table.id);
+    const update = useSelector((state) => state.table.update);
+    const dispatch = useDispatch();
     // const add = useSelector((state) => state.table.add);
     // const del = useSelector((state) => state.table.del);
     // console.log(category, 'rdeux category')
@@ -73,13 +78,26 @@ const ItemForm = () => {
 const onResponse = ()=>{
     
 }
+const onResponsee = (id) => {
+
+}
     const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
         useFormik({
             initialValues: initialValues,
             validationSchema: itemSchema,
             onSubmit: (values, action) => {
                 // AddLoginData(values, history, authCtx, notify , login , setLogin );
-                apiCall('post',{...values, 'category' : selectCategory}, null, onResponse);
+                if(update === true) {
+                    console.log(id,'api id is .............')
+                    apiCall('put',values,id, onResponsee)
+                    dispatch(tableActions.setUpdate(false));
+
+                }else {
+                    console.log('post......................')
+                    apiCall('post',{...values, 'category' : selectCategory}, null, onResponse)
+                }
+                
+                
                 // fetchItem();
                 console.log('data..............');
                 console.log(values);
@@ -147,15 +165,26 @@ const onResponse = ()=>{
                             </FormControl>
                         </Box>
 
-                        <Button
+                        {update && <Button
+                            type="submit"
+                            size="large"
+                            variant="outlined"
+                            color="primary"
+                            sx={{ mt: "10px" }}
+                            
+                        >
+                            Update Items
+                        </Button>}
+
+                        {!update && <Button
                             type="submit"
                             size="large"
                             variant="outlined"
                             color="primary"
                             sx={{ mt: "10px" }}
                         >
-                            Submit
-                        </Button>
+                            Add Items
+                        </Button>}
 
                     </Box>
                 </form>

@@ -93,9 +93,9 @@ const CategoryForm = () => {
             sx={{ mt: "30px" , mr : '20px'}}
             onClick={handleAdd}
           >
-            Submit
+            Add Category
           </Button>
-          <Button
+          {/* <Button
             type="submit"
             size="large"
             variant="outlined"
@@ -104,7 +104,7 @@ const CategoryForm = () => {
             sx={{ mt: "30px" }}
           >
             Delete
-          </Button>
+          </Button> */}
         </Box>
          
         </Box>

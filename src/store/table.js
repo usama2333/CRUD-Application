@@ -7,6 +7,8 @@ const initialState = {
     add : true,
     delete :false,
     log : false,
+    update : false,
+    id : null,
 }
 
 const tableSlice = createSlice ({
@@ -25,6 +27,12 @@ const tableSlice = createSlice ({
         },
         setDel(state , action) {
             state.del = action.payload;
+          },
+          setUpdate(state , action) {
+            state.update = action.payload;
+          },
+          setId(state , action) {
+            state.id = action.payload;
           },
         setLog(state)  {
             state.log = !state.log;
